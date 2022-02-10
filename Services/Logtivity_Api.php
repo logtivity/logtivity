@@ -16,6 +16,13 @@ class Logtivity_Api
 	 */
 	public $waitForResponse = true;
 
+	/**
+	 * The API key for either the site or team
+	 * 
+	 * @var string
+	 */
+	public $api_key;
+
 	public function __construct()
 	{
 		$this->options = new Logtivity_Options;
@@ -41,6 +48,13 @@ class Logtivity_Api
 		return $this->makeRequest($url, $body, 'GET');
 	}
 
+	public function setApiKey($api_key)
+	{
+		$this->api_key = $api_key;
+
+		return $this;
+	}
+
 	/**	
 	 * Make a request to the Logtivity API
 	 * 
@@ -51,9 +65,11 @@ class Logtivity_Api
 	 */
 	public function makeRequest($url, $body, $method = 'POST')
 	{
-		$api_key = logtivity_get_api_key();
+		if (!$this->api_key) {
+			$this->api_key = logtivity_get_api_key();
+		}
 
-		if (!$api_key) 
+		if (!$this->api_key) 
 		{
 			return;
 		}
@@ -67,7 +83,7 @@ class Logtivity_Api
 			'redirection' => 5,
 			'httpversion' => '1.0',
 			'headers' => [
-				'Authorization' => 'Bearer '.$api_key
+				'Authorization' => 'Bearer '.$this->api_key
 			],
 			'body' => $body,
 			'cookies' => array()

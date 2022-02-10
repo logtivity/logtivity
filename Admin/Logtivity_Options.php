@@ -70,6 +70,16 @@ class Logtivity_Options
 		return get_option($key);
 	}
 
+	/**	
+	 * Get the API key for the site
+	 * 
+	 * @return string
+	 */
+	public function getApiKey()
+	{
+		return $this->getOption('logtivity_site_api_key');
+	}
+
 	/**
 	 * Should we store the user id?
 	 * 
@@ -135,17 +145,16 @@ class Logtivity_Options
 					update_option($setting, $data[$setting]);
 				}
 			}
-			return;
-		}
-
-		foreach ($this->settings as $setting) 
-		{
-			if (isset($_POST[$setting]) && $this->validateSetting($setting, $_POST[$setting])) {
-				update_option($setting, $_POST[$setting]);
+		} else {
+			foreach ($this->settings as $setting) 
+			{
+				if (isset($_POST[$setting]) && $this->validateSetting($setting, $_POST[$setting])) {
+					update_option($setting, $_POST[$setting]);
+				}
 			}
 		}
 
-		$this->checkApiKey($_POST['logtivity_site_api_key'] ?? false);
+		$this->checkApiKey($data['logtivity_site_api_key'] ?? $_POST['logtivity_site_api_key'] ?? false);
 	}
 
 	public function checkApiKey($apiKey)

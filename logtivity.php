@@ -26,6 +26,7 @@ class Logtivity
 		'Admin/Logtivity_Admin',
 		'Services/Logtivity_Api',
 		'Services/Logtivity_Logger',
+		'Services/Logtivity_Register_Site',
 		'Helpers/Logtivity_Log_Global_Function',
 		'Logs/Logtivity_Abstract_Logger',
 	];
