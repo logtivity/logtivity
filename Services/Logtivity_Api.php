@@ -94,11 +94,13 @@ class Logtivity_Api
 		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST') {
 
 			$this->options->update([
-				'logtivity_latest_response' => [
-					'date' => date("Y-m-d H:i:s"),
-					'response' => print_r($response, true)
-				]
-			]);
+					'logtivity_latest_response' => [
+						'date' => date("Y-m-d H:i:s"),
+						'response' => print_r($response, true)
+					]
+				],
+				false
+			);
 
 		}
 

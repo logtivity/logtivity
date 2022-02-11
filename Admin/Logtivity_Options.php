@@ -136,25 +136,25 @@ class Logtivity_Options
 	 * @param  array $data
 	 * @return void
 	 */
-	public function update($data = null)
+	public function update($data = [], $checkApiKey = true)
 	{
-		if ($data) {
-			foreach ($this->settings as $setting) 
-			{
+		if (count($data)) {
+			foreach ($this->settings as $setting) {
 				if (array_key_exists($setting, $data) && $this->validateSetting($setting, $data[$setting])) {
 					update_option($setting, $data[$setting]);
 				}
 			}
 		} else {
-			foreach ($this->settings as $setting) 
-			{
+			foreach ($this->settings as $setting) {
 				if (isset($_POST[$setting]) && $this->validateSetting($setting, $_POST[$setting])) {
 					update_option($setting, $_POST[$setting]);
 				}
 			}
 		}
 
-		$this->checkApiKey($data['logtivity_site_api_key'] ?? $_POST['logtivity_site_api_key'] ?? false);
+		if ($checkApiKey) {
+			$this->checkApiKey($data['logtivity_site_api_key'] ?? $_POST['logtivity_site_api_key'] ?? false);
+		}
 	}
 
 	public function checkApiKey($apiKey)
