@@ -74,7 +74,7 @@ class Logtivity_Api
 		}
 
 		if (!$this->options->urlHash()) {
-			$this->options->update(['logtivity_url_hash' => home_url()], false);
+			$this->options->update(['logtivity_url_hash' => md5(home_url())], false);
 		}
 
 		if (logtivity_has_site_url_changed()) {
