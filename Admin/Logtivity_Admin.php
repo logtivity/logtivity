@@ -97,6 +97,14 @@ class Logtivity_Admin
 			return;
 		}
 
+		$this->options->update([
+				'logtivity_url_hash' => md5(home_url()),
+			],
+			false
+		);
+
+		delete_transient( 'dismissed-logtivity-site-url-has-changed-notice' );
+
 		$this->options->update();
 		
 	    wp_safe_redirect( $this->settingsPageUrl() );

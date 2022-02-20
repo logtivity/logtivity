@@ -22,6 +22,7 @@ class Logtivity
 		'Helpers/Helpers',
 		'Helpers/Logtivity_Wp_User',
 		'Admin/Logtivity_Log_Index_Controller',
+		'Admin/Logtivity_Dismiss_Notice_Controller',
 		'Admin/Logtivity_Options',
 		'Admin/Logtivity_Admin',
 		'Services/Logtivity_Api',
@@ -82,6 +83,8 @@ class Logtivity
 		register_activation_hook( __FILE__, [$this, 'activated']);
 
 		add_action( 'admin_notices', [$this, 'welcomeMessage']);
+		
+		add_action( 'admin_notices', [$this, 'checkForSiteUrlChange']);
 
 		add_action('admin_enqueue_scripts', [$this, 'loadScripts']);
 	}
@@ -173,6 +176,13 @@ class Logtivity
 			echo logtivity_view('activation');
 
 		    delete_transient( 'logtivity-welcome-notice' );
+		}
+	}
+
+	public function checkForSiteUrlChange()
+	{
+		if(logtivity_has_site_url_changed() && !get_transient( 'dismissed-logtivity-site-url-has-changed-notice')) {
+			echo logtivity_view('site-url-changed-notice');
 		}
 	}
 

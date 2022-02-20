@@ -17,6 +17,7 @@ class Logtivity_Options
 		'logtivity_enable_debug_mode',
 		'logtivity_latest_response',
 		'logtivity_api_key_check',
+		'logtivity_url_hash',
 	];
 
 	/**
@@ -130,6 +131,11 @@ class Logtivity_Options
 		return $this->getOption('logtivity_enable_debug_mode');
 	}
 
+	public function urlHash()
+	{
+		return $this->getOption('logtivity_url_hash');
+	}
+
 	/**
 	 * Update the options for this plugin
 	 *
@@ -186,6 +192,10 @@ class Logtivity_Options
 	 */
 	protected function validateSetting($setting, $value)
 	{
+		if (!isset($this->rules[$setting])) {
+			return true;
+		}
+
 		$method = $this->rules[$setting];
 
 		if ($method == 'is_bool') {

@@ -1,8 +1,15 @@
 <?php echo logtivity_view('_admin-header'); ?>
 
-<div class="postbox">
-	<div class="inside logtivity-settings">
+<div class="postbox logtivity-settings">
+	<?php if (logtivity_has_site_url_changed()): ?>
+		<div style="background: #DC3232;color: #fff;padding: 1em">
+			<h2 style="color: white; padding-left: 0" class="title">We've detected a change in your site URL.</h2>
+			<p>Is this a dev/staging environment?</p>
+			<p>We've stopped logging just incase. To start logging again just click the 'Update Settings' button below and we'll kick them off again.</p>
+		</div>
+	<?php endif ?>
 
+	<div class="inside">
 		<h1 style="padding-top: 20px;">Settings</h1>
 
 		<form action="<?php echo admin_url( 'admin-ajax.php' ); ?>?action=logtivity_update_settings" method="post">

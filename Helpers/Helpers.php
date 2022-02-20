@@ -69,3 +69,14 @@ function logtivity_get_api_url()
 
     return 'https://api.logtivity.io';
 }
+
+function logtivity_has_site_url_changed()
+{
+    $hash = (new Logtivity_Options)->urlHash();
+
+    if (!$hash) {
+        return false;
+    }
+
+    return $hash !== md5(home_url());
+}

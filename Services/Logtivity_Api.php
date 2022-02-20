@@ -69,8 +69,15 @@ class Logtivity_Api
 			$this->api_key = logtivity_get_api_key();
 		}
 
-		if (!$this->api_key) 
-		{
+		if (!$this->api_key) {
+			return;
+		}
+
+		if (!$this->options->urlHash()) {
+			$this->options->update(['logtivity_url_hash' => home_url()], false);
+		}
+
+		if (logtivity_has_site_url_changed()) {
 			return;
 		}
 

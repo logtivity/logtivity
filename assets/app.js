@@ -153,6 +153,32 @@ var LogtivityLogIndex = {
 
 };
 
+var DismissUrlHasChanged = {
+
+	init: function() {
+
+		jQuery( document ).on( 'click', '.notice-dismiss', function () {
+			var type = jQuery(this).closest('.is-dismissible').attr('notice');
+			var dismissUntil = jQuery(this).closest('.is-dismissible').attr('dismiss-until');
+
+			if (type) {
+				jQuery.ajax( ajaxurl, {
+					type: 'POST',
+					data: {
+						action: 'logtivity_dismiss_notice',
+						type: type,
+						dismiss_until: dismissUntil,
+					}
+				});
+			}
+
+		});
+
+	}
+
+};
+
 jQuery(function() {
 	LogtivityLogIndex.init();
+	DismissUrlHasChanged.init();
 });
