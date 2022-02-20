@@ -181,6 +181,10 @@ class Logtivity
 
 	public function checkForSiteUrlChange()
 	{
+		if ( !current_user_can( 'manage_options' ) )  {
+			return;
+		}
+		
 		if(logtivity_has_site_url_changed() && !get_transient( 'dismissed-logtivity-site-url-has-changed-notice')) {
 			echo logtivity_view('site-url-changed-notice');
 		}
