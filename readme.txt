@@ -4,7 +4,7 @@ Contributors: logtivity, stevejburge
 Tags: activity log, logging, event monitoring, user activity, easy digital downloads, edd, formidable, formidable pro
 Requires at least: 4.7
 Tested up to: 5.8
-Stable tag: 1.10.0
+Stable tag: 1.11.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -277,6 +277,12 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 * Log tivity, loggtivity, logg tivity (all incorrect)
 
 == Changelog ==
+
+= 1.11.0 =
+
+_Release Date – Sunday 20th February 2022_
+
+* Disable logging if site_url changes and show notice to admin to stop accidental logs coming from dev/staging environments.
 
 = 1.10.0 =
 

@@ -4,14 +4,14 @@
  * Plugin Name: Logtivity
  * Plugin URI:  https://logtivity.io
  * Description: Dedicated Event Monitoring for WordPress using Logtivity.io.
- * Version:     1.10.0
+ * Version:     1.11.0
  * Author:      Logtivity
  * Text Domain: logtivity
  */
 
 class Logtivity
 {
-	protected $version = '1.10.0';
+	protected $version = '1.11.0';
 
 	/**
 	 * List all classes here with their file paths. Keep class names the same as filenames.
@@ -184,7 +184,7 @@ class Logtivity
 		if ( !current_user_can( 'manage_options' ) )  {
 			return;
 		}
-		
+
 		if(logtivity_has_site_url_changed() && !get_transient( 'dismissed-logtivity-site-url-has-changed-notice')) {
 			echo logtivity_view('site-url-changed-notice');
 		}

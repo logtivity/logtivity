@@ -4,8 +4,7 @@
 	<?php if (logtivity_has_site_url_changed()): ?>
 		<div style="background: #DC3232;color: #fff;padding: 1em">
 			<h2 style="color: white; padding-left: 0" class="title">We've detected a change in your site URL.</h2>
-			<p>Is this a dev/staging environment?</p>
-			<p>We've stopped logging just incase. To start logging again just click the 'Update Settings' button below and we'll kick them off again.</p>
+			<p>Is this a dev or staging environment? As a precaution, we've stopped logging. To start recording logs, again click the 'Update Settings' button below.</p>
 		</div>
 	<?php endif ?>
 
