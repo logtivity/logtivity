@@ -31,7 +31,7 @@ class Logtivity_Register_Site
 				[
 					'logtivity_site_api_key' => $response->api_key
 				]
-			),
+			)
 		);
 	}
 }
