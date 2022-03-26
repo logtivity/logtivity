@@ -29,11 +29,25 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 
 		if ($old_status != 'publish' && $new_status == 'publish') {
 			$this->action = $this->getPostTypeLabel($post->ID) . ' Published';
+			return;
 		}
 
 		if ($old_status == 'publish' && $new_status == 'draft') {
 			$this->action = $this->getPostTypeLabel($post->ID) . ' Unpublished';
+			return;
 		}
+
+		if ($old_status != $new_status) {
+			Logtivity_Logger::log()
+				->setAction(
+					$this->getPostTypeLabel($post->ID) . ' Status changed from '.$old_status.' to '.$new_status
+				)
+				->setContext($post->post_title)
+				->addMeta('Post ID', $post->ID)
+				->addMeta('Post Type', $post->post_type)
+				->send();
+		}
+
 	}
 
 	/**
