@@ -125,6 +125,11 @@ abstract class Logtivity_Abstract_Logger
 	 */
 	protected function getPostTypeLabel($post_id)
 	{
-		return ucwords( str_replace(['_', '-'], ' ', get_post_type($post_id)) );
+		return $this->formatLabel(get_post_type($post_id));
+	}
+
+	protected function formatLabel($label)
+	{
+		return ucwords( str_replace(['_', '-'], ' ', $label) );
 	}
 }

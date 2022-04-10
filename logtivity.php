@@ -45,6 +45,7 @@ class Logtivity
 		'Logs/Core/Logtivity_Plugin',
 		'Logs/Core/Logtivity_Comment',
 		'Logs/Core/Logtivity_Term',
+		'Logs/Core/Logtivity_Meta',
 	];
 
 	/**

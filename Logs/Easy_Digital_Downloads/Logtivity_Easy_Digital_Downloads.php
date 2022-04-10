@@ -17,7 +17,8 @@ class Logtivity_Easy_Digital_Downloads extends Logtivity_Abstract_Easy_Digital_D
 	{
 		$log = Logtivity_Logger::log()
 			->setAction('Download Added to Cart')
-			->setContext(logtivity_get_the_title($download_id));
+			->setContext(logtivity_get_the_title($download_id))
+			->setPostId($download_id);
 
 		$prices = edd_get_variable_prices($download_id);
 
@@ -135,6 +136,7 @@ class Logtivity_Easy_Digital_Downloads extends Logtivity_Abstract_Easy_Digital_D
 		$log = Logtivity_Logger::log()
 			->setAction('File Downloaded')
 			->setContext($this->getDownloadTitle($download->get_ID(), $args['price_id'] ?? null))
+			->setPostId($download->get_ID())
 			->addMeta('Payment Key', $this->getPaymentKey($payment));
 
 		if (isset($args['file_key'])) {

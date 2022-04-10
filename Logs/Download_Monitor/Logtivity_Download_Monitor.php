@@ -12,6 +12,8 @@ class Logtivity_Download_Monitor extends Logtivity_Abstract_Logger
 		return Logtivity_Logger::log()
 			->setAction('File Downloaded')
 			->setContext($download->get_title())
+			->setPostType(get_post_type($download->get_id()))
+			->setPostId($download->get_id())
 			->addMeta('Download Slug', $download->get_slug())
 			->addMeta('Download ID', $download->get_id())
 			->addMeta('Download Count', $download->get_download_count())

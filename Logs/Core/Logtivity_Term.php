@@ -2,6 +2,11 @@
 
 class Logtivity_Term
 {
+	protected $ignoreTaxonomies = [
+		'nav_menu',
+		'edd_log_type',
+	];
+
 	public function __construct()
 	{
 		add_action( 'edited_terms', [$this, 'termUpdated'], 10, 2 );
@@ -11,6 +16,10 @@ class Logtivity_Term
 
 	public function termCreated($term_id, $tt_id, $taxonomy)
 	{
+		if (in_array($taxonomy, $this->ignoreTaxonomies)) {
+			return;
+		}
+
 		$term = get_term_by('id', $term_id, $taxonomy);
 
 		return Logtivity_Logger::log()
@@ -25,6 +34,10 @@ class Logtivity_Term
 
 	public function termUpdated($term_id, $taxonomy)
 	{
+		if (in_array($taxonomy, $this->ignoreTaxonomies)) {
+			return;
+		}
+
 		$term = get_term_by('id', $term_id, $taxonomy);
 
 		return Logtivity_Logger::log()
@@ -39,6 +52,10 @@ class Logtivity_Term
 
 	public function termDeleted($term, $tt_id, $taxonomy, $deleted_term, $object_ids)
 	{
+		if (in_array($taxonomy, $this->ignoreTaxonomies)) {
+			return;
+		}
+
 		return Logtivity_Logger::log()
 			->setAction('Term Deleted')
 			->setContext($deleted_term->name) 

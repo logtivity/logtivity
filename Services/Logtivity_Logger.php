@@ -30,6 +30,20 @@ class Logtivity_Logger extends Logtivity_Api
 	 * @var string
 	 */
 	public $context;
+	
+	/**	
+	 * The post type, if relevant for a given log
+	 * 
+	 * @var string
+	 */
+	public $post_type;
+
+	/**	
+	 * The post ID, if relevant for a given log
+	 * 
+	 * @var integer
+	 */
+	public $post_id;
 
 	/**	
 	 * Extra info to pass to the log
@@ -127,6 +141,30 @@ class Logtivity_Logger extends Logtivity_Api
 	}
 
 	/**
+	 * Set the post_type string before sending.
+	 * 
+	 * @param string
+	 */
+	public function setPostType($post_type)
+	{
+		$this->post_type = $post_type;
+
+		return $this;
+	}
+
+	/**
+	 * Set the post_id before sending.
+	 * 
+	 * @param integer
+	 */
+	public function setPostId($post_id)
+	{
+		$this->post_id = $post_id;
+
+		return $this;
+	}
+
+	/**
 	 * Add to an array any additional information you would like to pass to this log.
 	 * 
 	 * @param string $key
@@ -139,6 +177,22 @@ class Logtivity_Logger extends Logtivity_Api
 			'key' => $key,
 			'value' => $value,
 		];
+
+		return $this;
+	}
+
+	/**	
+	 * Add the meta if the first condition is true
+	 * 
+	 * @param boolean $condition
+	 * @param string  $key    
+	 * @param mixed  $value
+	 */
+	public function addMetaIf($condition = false, $key, $value)
+	{
+		if ($condition) {
+			$this->addMeta($key, $value);
+		}
 
 		return $this;
 	}
@@ -209,6 +263,8 @@ class Logtivity_Logger extends Logtivity_Api
 		return [
 			'action' => $this->action,
 			'context' => $this->context,
+			'post_type' => $this->post_type,
+			'post_id' => $this->post_id,
 			'meta' => $this->getMeta(),
 			'user_id' => $this->getUserID(),
 			'username' => $this->maybeGetUsersUsername(),

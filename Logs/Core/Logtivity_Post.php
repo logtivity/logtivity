@@ -43,8 +43,8 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 					$this->getPostTypeLabel($post->ID) . ' Status changed from '.$old_status.' to '.$new_status
 				)
 				->setContext($post->post_title)
-				->addMeta('Post ID', $post->ID)
-				->addMeta('Post Type', $post->post_type)
+				->setPostType($post->post_type) 
+				->setPostId($post->ID) 
 				->send();
 		}
 
@@ -72,19 +72,17 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 			return true;
 		}
 
-		$log = Logtivity_Logger::log()
+		$revision = $this->getRevision($post_id);
+
+		Logtivity_Logger::log()
 			->setAction($this->action ?? $this->getPostTypeLabel($post->ID) . ' Updated')
 			->setContext($post->post_title)
-			->addMeta('Post ID', $post->ID)
+			->setPostType($post->post_type)
+			->setPostId($post->ID)
 			->addMeta('Post Title', $post->post_title)
-			->addMeta('Post Type', $post->post_type)
-			->addMeta('Post Status', $post->post_status);
-
-		if ($revision = $this->getRevision($post_id)) {
-			$log->addMeta('View Revision', $revision);
-		}
-
-		$log->send();
+			->addMeta('Post Status', $post->post_status)
+			->addMetaIf($revision, 'View Revision', $revision)
+			->send();
 
 		update_post_meta($post_id, 'logtivity_last_logged', (new \DateTime())->format('Y-m-d H:i:s'));
 	}
@@ -112,8 +110,8 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 		return Logtivity_Logger::log()
 			->setAction($this->getPostTypeLabel($post_id) . ' Trashed')
 			->setContext(logtivity_get_the_title($post_id))
-			->addMeta('Post ID', $post_id)
-			->addMeta('Post Type', get_post_type($post_id))
+			->setPostType(get_post_type($post_id))
+			->setPostId($post_id)
 			->addMeta('Post Title', logtivity_get_the_title($post_id))
 			->send();
 	}
@@ -125,8 +123,8 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 				$this->getPostTypeLabel($post->ID) . ' Restored from Trash'
 			)
 			->setContext($post->post_title)
-			->addMeta('Post ID', $post->ID)
-			->addMeta('Post Type', $post->post_type)
+			->setPostType($post->post_type)
+			->setPostId($post->ID)
 			->addMeta('Post Title', $post->post_title)
 			->send();
 	}
@@ -146,8 +144,8 @@ class Logtivity_Post extends Logtivity_Abstract_Logger
 				$this->getPostTypeLabel($post_id) . ' Permanently Deleted'
 			)
 			->setContext(logtivity_get_the_title($post_id))
-			->addMeta('Post ID', $post_id)
-			->addMeta('Post Type', get_post_type($post_id))
+			->setPostType(get_post_type($post_id))
+			->setPostId($post_id)
 			->addMeta('Post Title', logtivity_get_the_title($post_id))
 			->send();
 	}
