@@ -30,6 +30,7 @@ class Logtivity
 		'Services/Logtivity_Register_Site',
 		'Helpers/Logtivity_Log_Global_Function',
 		'Logs/Logtivity_Abstract_Logger',
+		'Services/Logtivity_Check_For_Disabled_Individual_Logs',
 	];
 
 	/**

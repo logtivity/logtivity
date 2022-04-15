@@ -130,6 +130,26 @@
 							<span class="description">This will log the latest response from the Logtivity API. This can be useful for debugging the result from an API call when storing a log. We <strong>recommend setting this to off by default</strong> as this will allow us to send logs asynchronously and not wait for a response from the API. This will be more performant.</span>
 						</td>
 					</tr>
+					<tr class="user-user-login-wrap">
+						<th>
+							<label for="logtivity_disable_individual_logs">Disable Individual Logs</label>
+							<?php if (has_filter('logtivity_disable_individual_logs')): ?>
+								<div class="logtivity-constant">This option has been set in code.</div>
+							<?php endif ?>
+						</th>
+						<td>
+							<textarea style="width: 100%;" rows="10" <?php echo ( has_filter('logtivity_disable_individual_logs') ? 'readonly' : ''); ?> name="logtivity_disable_individual_logs" id="logtivity_disable_individual_logs" class="regular-checkbox" placeholder="User Logged In&#10;User Created && subscriber"><?php echo esc_html($options['logtivity_disable_individual_logs']); ?></textarea>
+						</td>
+						<td>
+							<span class="description">
+								You can disable individual logged actions here by listing the action names, one per line.
+
+								<br> <br>
+
+								To specify the context field as well, separate the action and context keywords with an && symbol.
+							</span>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 

@@ -14,6 +14,7 @@ class Logtivity_Options
 		'logtivity_should_store_ip',
 		'logtivity_should_log_profile_link',
 		'logtivity_should_log_username',
+		'logtivity_disable_individual_logs',
 		'logtivity_enable_debug_mode',
 		'logtivity_latest_response',
 		'logtivity_api_key_check',
@@ -34,6 +35,7 @@ class Logtivity_Options
 		'logtivity_should_log_username' => 'is_bool',
 		'logtivity_enable_debug_mode' => 'is_bool',
 		'logtivity_latest_response' => 'is_array',
+		'logtivity_disable_individual_logs' => 'is_string',
 	];
 
 	/**

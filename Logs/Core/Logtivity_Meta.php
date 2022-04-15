@@ -12,6 +12,7 @@ class Logtivity_Meta extends Logtivity_Abstract_Logger
 		'_wp_trash_meta_time',
 		'_wp_desired_post_slug',
 		'_wp_trash_meta_comments_status',
+		'_pingme',
 	];
 
 	protected $ignorePostTypes = [
