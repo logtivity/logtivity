@@ -282,7 +282,7 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 
 _Release Date – Tuesday 19th April 2022_
 
-* Add ability for admins to disable certain actions from being logged.
+* Add ability for admins to disable individual actions from being logged.
 
 = 1.14.0 =
 
