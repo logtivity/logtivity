@@ -2,6 +2,10 @@ var LogtivityLogIndex = {
 	
 	init: function() {
 		this.container = jQuery('#logtivity-log-index');
+
+		if (!this.container.length) {
+			return;
+		}
 		
 		this.form = jQuery('#logtivity-log-index-search-form');
 

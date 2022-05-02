@@ -74,7 +74,10 @@ class Logtivity
 		'FrmHooksController' => [
 			'Logs/Formidable/Logtivity_FrmEntryFormatter',
 			'Logs/Formidable/Logtivity_Formidable'
-		]
+		],
+		'PMXI_Plugin' => [
+			'Logs/WP_All_Import/Logtivity_WP_All_Import',
+		],
 	];
 
 	public function __construct()
