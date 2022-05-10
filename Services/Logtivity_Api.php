@@ -109,6 +109,16 @@ class Logtivity_Api
 				false
 			);
 
+			$body = json_decode($response, true);
+
+			if (isset($body['settings'])) {
+				$this->options->update([
+						'logtivity_global_disabled_logs' => $body['settings']['disabled_logs'],
+						'logtivity_enable_white_label_mode' => $body['settings']['enable_white_label_mode'],
+					],
+					false
+				);
+			}
 		}
 
 		return $response;

@@ -1,4 +1,4 @@
-<?php echo logtivity_view('_admin-header'); ?>
+<?php echo logtivity_view('_admin-header', compact('options')); ?>
 
 <div class="postbox">
 	<div class="logtivity-settings">

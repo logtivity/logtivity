@@ -19,6 +19,8 @@ class Logtivity_Options
 		'logtivity_latest_response',
 		'logtivity_api_key_check',
 		'logtivity_url_hash',
+		'logtivity_global_disabled_logs',
+		'logtivity_enable_white_label_mode',
 	];
 
 	/**
@@ -130,12 +132,38 @@ class Logtivity_Options
 	 */
 	public function shouldLogLatestResponse()
 	{
-		return $this->getOption('logtivity_enable_debug_mode');
+		return $this->getOption('logtivity_enable_debug_mode') || $this->shouldCheckInWithApi();
+	}
+
+	/**
+	 * Is it time to check in with the latest API response incase of any new global settings?
+	 * 
+	 * @return bool
+	 */
+	public function shouldCheckInWithApi()
+	{
+		$latestReponse = $this->getOption('logtivity_latest_response');
+
+		if (is_array($latestReponse) && isset($latestReponse['date'])) {
+			return time() - strtotime($latestReponse['date']) > 3601; // 1 hour
+		}
+
+		return false;
 	}
 
 	public function urlHash()
 	{
 		return $this->getOption('logtivity_url_hash');
+	}
+
+	public function disabledLogs()
+	{
+		return $this->getOption('logtivity_global_disabled_logs');
+	}
+
+	public function isWhiteLabelMode()
+	{
+		return $this->getOption('logtivity_enable_white_label_mode');
 	}
 
 	/**

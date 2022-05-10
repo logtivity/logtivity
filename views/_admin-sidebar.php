@@ -1,4 +1,9 @@
 <!-- sidebar -->
+
+<?php if (isset($options['logtivity_enable_white_label_mode']) && $options['logtivity_enable_white_label_mode'] == '1'):
+return; ?>
+	
+<?php endif ?>
 <div id="postbox-container-1" class="postbox-container">
 	<div class="postbox">
 

@@ -21,10 +21,10 @@ class Logtivity_Admin
 	{
 		if (!apply_filters('logtivity_hide_from_menu', false)) {
 			add_menu_page(
-				'Logtivity', 
-				'Logtivity', 
+				($this->options->isWhiteLabelMode() ? 'Logs' : 'Logtivity'), 
+				($this->options->isWhiteLabelMode() ? 'Logs' : 'Logtivity'), 
 				'manage_options', 
-				'logtivity', 
+				($this->options->isWhiteLabelMode() ? 'logs' : 'logtivity'), 
 				[$this, 'showLogIndexPage'], 
 				'dashicons-chart-area', 
 				26 
@@ -33,7 +33,7 @@ class Logtivity_Admin
 		
 		if (!apply_filters('logtivity_hide_settings_page', false)) {
 			add_submenu_page(
-				'logtivity', 
+				($this->options->isWhiteLabelMode() ? 'logs' : 'logtivity'),
 				'Logtivity Settings', 
 				'Settings', 
 				'manage_options', 

@@ -23,7 +23,7 @@ class Logtivity_Log_Index_Controller
 			])
 		);
 
-		if ($response->message) {
+		if (property_exists($response, 'message') && $response->message) {
 			return $this->errorReponse($response->message);
 		}
 

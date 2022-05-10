@@ -1,4 +1,4 @@
-<?php echo logtivity_view('_admin-header'); ?>
+<?php echo logtivity_view('_admin-header', compact('options')); ?>
 
 <div class="postbox logtivity-settings">
 	<?php if (logtivity_has_site_url_changed()): ?>
@@ -127,7 +127,7 @@
 							<input <?php echo ( has_filter('logtivity_enable_debug_mode') ? 'readonly' : ''); ?> type="checkbox" name="logtivity_enable_debug_mode" id="logtivity_enable_debug_mode" value="1" class="regular-checkbox" <?php echo ( absint($options['logtivity_enable_debug_mode']) ? 'checked' : ''); ?>>
 						</td>
 						<td>
-							<span class="description">This will log the latest response from the Logtivity API. This can be useful for debugging the result from an API call when storing a log. We <strong>recommend setting this to off by default</strong> as this will allow us to send logs asynchronously and not wait for a response from the API. This will be more performant.</span>
+							<span class="description">This will log the latest response from the API. This can be useful for debugging the result from an API call when storing a log. We <strong>recommend setting this to off by default</strong> as this will allow us to send logs asynchronously and not wait for a response from the API. This will be more performant.</span>
 						</td>
 					</tr>
 					<tr class="user-user-login-wrap">
@@ -147,6 +147,12 @@
 								<br> <br>
 
 								To specify the context field as well, separate the action and context keywords with an && symbol.
+
+								<br><br>
+
+								<?php if (!isset($options['logtivity_enable_white_label_mode']) || $options['logtivity_enable_white_label_mode'] != '1'): ?>
+									If you have multiple sites on Logtivity and would rather control disabled logs globally you can go to the <a target="_blank" rel="nofollow" href="https://app.logtivity.io/team-settings/global-plugin-settings">Global Plugin settings page</a> inside your Logtivity dashboard.
+								<?php endif; ?>
 							</span>
 						</td>
 					</tr>
@@ -162,7 +168,7 @@
 	</div>
 </div>
 
-<?php if (absint( $options['logtivity_enable_debug_mode'] )): ?>
+<?php // if (absint( $options['logtivity_enable_debug_mode'] )): ?>
 
 	<div class="postbox">
 		<div class="inside">
@@ -190,6 +196,6 @@
 		</div>
 	</div>
 
-<?php endif ?>
+<?php // endif ?>
 
 <?php echo logtivity_view('_admin-footer', compact('options')); ?>
