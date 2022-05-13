@@ -148,7 +148,7 @@ class Logtivity_Options
 			return time() - strtotime($latestReponse['date']) > 3601; // 1 hour
 		}
 
-		return false;
+		return true;
 	}
 
 	public function urlHash()
