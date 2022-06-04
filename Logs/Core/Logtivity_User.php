@@ -5,7 +5,7 @@ class Logtivity_User extends Logtivity_Abstract_Logger
 	public function registerHooks()
 	{
 		add_action('wp_login', [$this, 'userLoggedIn'], 10, 2);
-		add_action('clear_auth_cookie', [$this, 'userLoggedOut']);
+		add_action('wp_logout', [$this, 'userLoggedOut'], 10, 1);
 		add_action( 'user_register', [$this, 'userCreated'], 10, 1 );
 		add_action( 'delete_user', [$this, 'userDeleted'] );
 		add_action( 'profile_update', [$this, 'profileUpdated'], 10, 2 );
@@ -21,14 +21,18 @@ class Logtivity_User extends Logtivity_Abstract_Logger
 	    	->send();
 	}
 
-	public function userLoggedOut()
+	public function userLoggedOut($user_id)
 	{
-		$user = new Logtivity_WP_User();
+		if ($user_id == 0) {
+			return;
+		}
+		
+		$user = new Logtivity_WP_User($user_id);
 
-		return (new Logtivity_Logger())
-						->setAction('User Logged Out')
-						->setContext($user->getRole())
-						->send();
+		return (new Logtivity_Logger($user_id))
+			->setAction('User Logged Out')
+			->setContext($user->getRole())
+			->send();
 	}
 
 	public function userCreated($user_id)

@@ -168,7 +168,7 @@
 	</div>
 </div>
 
-<?php // if (absint( $options['logtivity_enable_debug_mode'] )): ?>
+<?php if (absint( $options['logtivity_enable_debug_mode'] )): ?>
 
 	<div class="postbox">
 		<div class="inside">
@@ -196,6 +196,6 @@
 		</div>
 	</div>
 
-<?php // endif ?>
+<?php endif ?>
 
 <?php echo logtivity_view('_admin-footer', compact('options')); ?>

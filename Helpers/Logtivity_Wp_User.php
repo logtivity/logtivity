@@ -41,11 +41,19 @@ class Logtivity_Wp_User
 
 	public function id()
 	{
+		if ($this->user->ID == 0) {
+			return;
+		}
+
 		return $this->user->ID;
 	}
 
 	public function userLogin()
 	{
+		if ($this->user->ID == 0) {
+			return;
+		}
+
 		return $this->user->user_login;
 	}
 
@@ -95,8 +103,7 @@ class Logtivity_Wp_User
 	{
 		$meta = get_user_meta($this->user->ID, $meta_key, $returnString);
 
-		if ($meta != '') 
-		{
+		if ($meta != '') {
 			return $meta;
 		}
 
@@ -120,8 +127,7 @@ class Logtivity_Wp_User
 	 */
 	public function isLoggedIn()
 	{
-		if ($this->user->ID == 0) 
-		{
+		if ($this->user->ID == 0) {
 			return false;
 		}
 
@@ -137,8 +143,7 @@ class Logtivity_Wp_User
 	 */
 	public function hasRole($role)
 	{
-		if ( in_array($role, $this->getRoles()) ) 
-		{
+		if ( in_array($role, $this->getRoles()) ) {
 			return true;
 		}
 
@@ -165,8 +170,6 @@ class Logtivity_Wp_User
 		foreach ($this->getRoles() as $role) {
 			return $role;
 		}
-
-		return false;
 	}
 
 }
