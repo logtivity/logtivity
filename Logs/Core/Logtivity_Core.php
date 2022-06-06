@@ -9,6 +9,8 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 		add_filter( 'widget_update_callback', [$this, 'widgetUpdated'], 10, 4);
 		add_action('init', [$this, 'maybeSettingsUpdated']);
 		add_action( 'permalink_structure_changed', [$this, 'permalinksUpdated'], 10, 2);
+		add_action( 'update_option', [$this, 'optionUpdated'], 10, 3);
+
 		// do_action_ref_array( 'phpmailer_init', array( &$phpmailer ) );
 	}
 
@@ -72,6 +74,31 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 		Logtivity::log()
 			->setAction('Settings Updated')
 			->setContext('Core:'.$_POST['option_page'])
+			->send();
+	}
+
+	public function optionUpdated($option, $old_value, $value)
+	{
+		$ignore = [
+			'cron',
+			'action_scheduler_lock_async-request-runner',
+			'wp_all_export_pro_addons_not_included',
+			'logtivity_latest_response',
+			'logtivity_api_key_check',
+			'logtivity_url_hash',
+			'logtivity_global_disabled_logs',
+			'logtivity_enable_white_label_mode',
+		];
+
+		if (in_array($option, $ignore)) {
+			return;
+		}
+
+		Logtivity::log()
+			->setAction('Option Updated')
+			->setContext($option)
+			->addMeta('Old Value', $old_value)
+			->addMeta('New Value', $value)
 			->send();
 	}
 
