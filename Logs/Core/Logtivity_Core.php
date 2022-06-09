@@ -94,6 +94,16 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			return;
 		}
 
+		$wildcardIgnores = [
+			'transient',
+		];
+
+		foreach ($wildcardIgnores as $wildcard) {
+			if (strpos($option, $wildcard) !== false) {
+				return;
+			}
+		}
+
 		Logtivity::log()
 			->setAction('Option Updated')
 			->setContext($option)

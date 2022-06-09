@@ -44,15 +44,20 @@ class Logtivity_Check_For_Disabled_Individual_Logs
 		return false;
 	}
 
-	private function matches($keyword1, $disabledKeyword)
+	private function matches($keyword, $disabledKeyword)
 	{
-		$disabledKeyword = trim($disabledKeyword);
+		$keyword = trim(strtolower($keyword));
+		$disabledKeyword = trim(strtolower($disabledKeyword));
 
 		if ($disabledKeyword === '*') {
 			return true;
 		}
+
+		if (strpos($disabledKeyword, '*') !== false) {
+			return strpos($keyword, str_replace('*', '', $disabledKeyword)) !== false;
+		}
 		
-		return strtolower(trim($keyword1)) == strtolower($disabledKeyword);
+		return $keyword == $disabledKeyword;
 	}
 
 	private function getLogsToExclude()
