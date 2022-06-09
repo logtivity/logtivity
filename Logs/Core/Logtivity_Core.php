@@ -88,6 +88,11 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'logtivity_url_hash',
 			'logtivity_global_disabled_logs',
 			'logtivity_enable_white_label_mode',
+			'recently_activated',
+			'active_plugins',
+			'jp_sync_last_success_sync',
+			'jetpack_sync_settings_dedicated_sync_enabled',
+			'jetpack_plugin_api_action_links',
 		];
 
 		if (in_array($option, $ignore)) {
