@@ -79,6 +79,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 
 	public function optionUpdated($option, $old_value, $value)
 	{
+		if (!is_admin() || $old_value == $value) {
+			return;
+		}
+
 		$ignore = [
 			'cron',
 			'action_scheduler_lock_async-request-runner',
@@ -105,6 +109,11 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'wp_force_deactivated_plugins',
 			'fresh_site',
 			'allowedthemes',
+			'rxpp_blocked_methods_count',
+			'wordfence_syncAttackDataAttempts',
+			'akismet_spam_count',
+			'jetpack_next_sync_time_sync',
+			'jetpack_updates_sync_checksum',
 		];
 
 		if (in_array($option, $ignore)) {
@@ -116,6 +125,9 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'cache',
 			'auto_updater',
 			'frm_addons',
+			'wpe',
+			'edd_api',
+			'edd_sl',
 		];
 
 		foreach ($wildcardIgnores as $wildcard) {
