@@ -93,6 +93,18 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'jp_sync_last_success_sync',
 			'jetpack_sync_settings_dedicated_sync_enabled',
 			'jetpack_plugin_api_action_links',
+			'stats_cache',
+			'admin_email_lifespan',
+			'db_upgraded',
+			'delete_blog_hash',
+			'adminhash',
+			'auto_plugin_theme_update_emails',
+			'_wp_suggested_policy_text_has_changed',
+			'ftp_credentials',
+			'uninstall_plugins',
+			'wp_force_deactivated_plugins',
+			'fresh_site',
+			'allowedthemes',
 		];
 
 		if (in_array($option, $ignore)) {
@@ -101,6 +113,9 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 
 		$wildcardIgnores = [
 			'transient',
+			'cache',
+			'auto_updater',
+			'frm_addons',
 		];
 
 		foreach ($wildcardIgnores as $wildcard) {
