@@ -280,7 +280,7 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 
 = 1.18.0 =
 
-_Release Date – Friday 10th June 2022_
+_Release Date – Monday 13th June 2022_
 
 * Add logging of Option Updates.
 * Allow wildcards when disabling specific logs.
