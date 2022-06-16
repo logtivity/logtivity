@@ -72,6 +72,12 @@ class Logtivity_Meta extends Logtivity_Abstract_Logger
 			return $this->postThumbnailChanged($meta_id, $object_id, $meta_key, $_meta_value, $keyword);
 		}
 
+		$previousValue = get_post_meta($object_id, $meta_key, true);
+
+		if ($previousValue == $_meta_value) {
+			return;
+		}
+
 		return Logtivity_Logger::log()
 			->setAction($this->getPostTypeLabel($object_id) . ' Meta '. $keyword)
 			->setContext($meta_key)
@@ -79,7 +85,7 @@ class Logtivity_Meta extends Logtivity_Abstract_Logger
 			->setPostId($object_id) 
 			->addMeta('Meta Key', $meta_key)
 			->addMeta('Meta Value', $_meta_value)
-			->addMeta('Previous Value', get_post_meta($object_id, $meta_key, true))
+			->addMeta('Previous Value', $previousValue)
 			->addMeta('View Post', get_edit_post_link($object_id))
 			->send();
 	}

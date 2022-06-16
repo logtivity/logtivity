@@ -107,9 +107,11 @@ class Logtivity
 			$this->loadFile($filePath);
 		}
 
-		$this->maybeLoadLogClasses();
+		add_action('plugins_loaded', function() {
+			$this->maybeLoadLogClasses();
 
-		$this->loadIntegrationDependancies();
+			$this->loadIntegrationDependancies();
+		});
 	}
 
 	public function maybeLoadLogClasses()
@@ -136,17 +138,15 @@ class Logtivity
 
 	public function loadIntegrationDependancies()
 	{
-		add_action('plugins_loaded', function() {
-			foreach ($this->integrationDependancies as $key => $value) 
-			{
-				if (class_exists($key)) {
-					foreach ($value as $filePath) 
-					{
-						$this->loadFile($filePath);
-					}
+		foreach ($this->integrationDependancies as $key => $value) 
+		{
+			if (class_exists($key)) {
+				foreach ($value as $filePath) 
+				{
+					$this->loadFile($filePath);
 				}
 			}
-		});
+		}
 	}
 
 	public function loadFile($filePath)

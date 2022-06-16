@@ -114,6 +114,8 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'akismet_spam_count',
 			'jetpack_next_sync_time_sync',
 			'jetpack_updates_sync_checksum',
+			'wpcf7',
+			'gmt_offset',
 		];
 
 		if (in_array($option, $ignore)) {
