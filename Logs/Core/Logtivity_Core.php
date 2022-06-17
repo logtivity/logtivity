@@ -117,6 +117,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'wpcf7',
 			'gmt_offset',
 			'_edd_table_check',
+			'woocommerce_marketplace_suggestions',
 		];
 
 		if (in_array($option, $ignore)) {

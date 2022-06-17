@@ -80,6 +80,9 @@
 						<?php endif ?>
 					</th>
 					<td>
+						<?php if (isset($value['key']) && !isset($value['value'])) {
+							$value = '';
+						} ?>
 						<?php if (isset($value['value'])): ?>
 							<?php $value = $value['value']; ?>
 						<?php endif; ?>
