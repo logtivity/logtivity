@@ -200,6 +200,8 @@ class Logtivity_Options
 			return;
 		}
 
+		delete_option('logtivity_api_key_check');
+
 		$response = Logtivity::log()
 			->setAction('Settings Updated')
 			->setContext('Logtivity')
