@@ -195,12 +195,12 @@ class Logtivity_Options
 
 	public function checkApiKey($apiKey)
 	{
+		delete_option('logtivity_api_key_check');
+		
 		if (!$apiKey) {
 			update_option('logtivity_api_key_check', 'fail');
 			return;
 		}
-
-		delete_option('logtivity_api_key_check');
 
 		$response = Logtivity::log()
 			->setAction('Settings Updated')
