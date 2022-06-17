@@ -70,7 +70,7 @@ class Logtivity_Code_Snippets
 		return $logger
 			->addMetaIf(
 				isset($_POST['snippet_name']) && $_POST['snippet_name'] != '', 
-				'Snippet Name', 
+				'Snippet Title', 
 				$_POST['snippet_name']
 			)
 			->addMetaIf(
