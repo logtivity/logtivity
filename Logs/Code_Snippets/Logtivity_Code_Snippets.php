@@ -26,7 +26,7 @@ class Logtivity_Code_Snippets
 				->setContext($id)
 				->addMetaIf(
 					isset($_GET['action']) && $_GET['action'] == 'clone',
-					'Cloned',
+					'Cloned from ID',
 					$_GET['id'] ?? null
 				)
 		);
