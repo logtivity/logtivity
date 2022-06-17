@@ -78,6 +78,9 @@ class Logtivity
 		'PMXI_Plugin' => [
 			'Logs/WP_All_Import/Logtivity_WP_All_Import',
 		],
+		'\Code_Snippets\Plugin' => [
+			'Logs/Code_Snippets/Logtivity_Code_Snippets',
+		]
 	];
 
 	public function __construct()
