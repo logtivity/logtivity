@@ -116,6 +116,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'jetpack_updates_sync_checksum',
 			'wpcf7',
 			'gmt_offset',
+			'_edd_table_check',
 		];
 
 		if (in_array($option, $ignore)) {
@@ -126,10 +127,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'transient',
 			'cache',
 			'auto_updater',
-			'frm_addons',
 			'wpe',
 			'edd_api',
 			'edd_sl',
+			'frm_',
 		];
 
 		foreach ($wildcardIgnores as $wildcard) {
