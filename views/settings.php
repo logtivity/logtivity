@@ -180,7 +180,7 @@
 				<h4>Date: <?php echo sanitize_text_field($latest_response['date']); ?></h4>
 
 				<?php if ($latest_response['response']): ?>
-					<code style="display: block; padding: 20px;">
+					<code style="display: block; padding: 20px; overflow-x: auto;">
 							
 						<?php echo sanitize_text_field($latest_response['response']); ?>
 

@@ -92,9 +92,13 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'logtivity_url_hash',
 			'logtivity_global_disabled_logs',
 			'logtivity_enable_white_label_mode',
+			'logtivity_disabled_error_levels',
+			'logtivity_disable_error_logging',
 			'recently_activated',
 			'active_plugins',
 			'jp_sync_last_success_sync',
+			'jp_sync_retry_after_sync',
+			'postman_state',
 			'jetpack_sync_settings_dedicated_sync_enabled',
 			'jetpack_plugin_api_action_links',
 			'stats_cache',
@@ -118,6 +122,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'gmt_offset',
 			'_edd_table_check',
 			'woocommerce_marketplace_suggestions',
+			'recently_edited',
+			'rewrite_rules',
+			'limit_login_retries',
+			'post_views_count',
 		];
 
 		if (in_array($option, $ignore)) {

@@ -17,6 +17,13 @@ class Logtivity_Api
 	public $waitForResponse = true;
 
 	/**
+	 * Definitely don't wait for a response.
+	 * 
+	 * @var boolean
+	 */
+	public $asyncOverride = false;
+
+	/**
 	 * The API key for either the site or team
 	 * 
 	 * @var string
@@ -55,6 +62,13 @@ class Logtivity_Api
 		return $this;
 	}
 
+	public function async()
+	{
+		$this->asyncOverride = true;
+
+		return $this;
+	}
+
 	/**	
 	 * Make a request to the Logtivity API
 	 * 
@@ -81,7 +95,7 @@ class Logtivity_Api
 			return;
 		}
 
-		$shouldLogLatestResponse = $this->waitForResponse || $this->options->shouldLogLatestResponse();
+		$shouldLogLatestResponse = !$this->asyncOverride && ($this->waitForResponse || $this->options->shouldLogLatestResponse());
 
 		$response = wp_remote_post($this->getEndpoint($url), [
 			'method' => $method,
@@ -115,6 +129,8 @@ class Logtivity_Api
 				$this->options->update([
 						'logtivity_global_disabled_logs' => $body['settings']['disabled_logs'],
 						'logtivity_enable_white_label_mode' => $body['settings']['enable_white_label_mode'],
+						'logtivity_disabled_error_levels' => $body['settings']['disabled_error_levels'],
+						'logtivity_disable_error_logging' => $body['settings']['disable_error_logging'],
 					],
 					false
 				);

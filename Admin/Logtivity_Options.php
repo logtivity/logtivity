@@ -21,6 +21,8 @@ class Logtivity_Options
 		'logtivity_url_hash',
 		'logtivity_global_disabled_logs',
 		'logtivity_enable_white_label_mode',
+		'logtivity_disable_error_logging',
+		'logtivity_disabled_error_levels',
 	];
 
 	/**
@@ -123,6 +125,22 @@ class Logtivity_Options
 	public function shouldStoreUsername()
 	{
 		return $this->getOption('logtivity_should_log_username');
+	}
+
+	/**	
+	 * Get the error levels that are disabled
+	 * 
+	 * @return array
+	 */
+	public function disabledErrorLevels()
+	{
+		$result = $this->getOption('logtivity_disabled_error_levels');
+
+		if (is_array($result)) {
+			return array_keys(array_filter($result));
+		}
+
+		return [];
 	}
 
 	/**	

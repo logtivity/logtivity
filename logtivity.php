@@ -25,12 +25,20 @@ class Logtivity
 		'Admin/Logtivity_Dismiss_Notice_Controller',
 		'Admin/Logtivity_Options',
 		'Admin/Logtivity_Admin',
+		'Services/Logtivity_User_Logger_Trait',
 		'Services/Logtivity_Api',
 		'Services/Logtivity_Logger',
 		'Services/Logtivity_Register_Site',
 		'Helpers/Logtivity_Log_Global_Function',
 		'Logs/Logtivity_Abstract_Logger',
 		'Services/Logtivity_Check_For_Disabled_Individual_Logs',
+		/**
+		 * Error logging
+		 */
+		'Errors/Logtivity_Stack_Trace_Snippet',
+		'Errors/Logtivity_Stack_Trace',
+		'Errors/Logtivity_Error_Logger',
+		'Errors/Logtivity_Error_Log',
 	];
 
 	/**
@@ -39,6 +47,9 @@ class Logtivity
 	 * 
 	 */
 	private $logClasses = [
+		/**	
+		 * Activity logging
+		 */
 		'Logs/Core/Logtivity_Post',
 		'Logs/Core/Logtivity_User',
 		'Logs/Core/Logtivity_Core',
@@ -91,6 +102,10 @@ class Logtivity
 
 		register_activation_hook( __FILE__, [$this, 'activated']);
 
+		add_action( 'upgrader_process_complete', [$this, 'upgradeProcessComplete'], 10, 2);
+
+		add_action( 'activated_plugin', [$this, 'setLogtivityToLoadFirst']);
+
 		add_action( 'admin_notices', [$this, 'welcomeMessage']);
 		
 		add_action( 'admin_notices', [$this, 'checkForSiteUrlChange']);
@@ -98,9 +113,25 @@ class Logtivity
 		add_action('admin_enqueue_scripts', [$this, 'loadScripts']);
 	}
 
+	public function upgradeProcessComplete( $upgrader_object, $options ) 
+	{
+	    if ( $options['type'] != 'plugin' ) {
+	    	return;
+	    }
+
+		if ($options['action'] == 'update') {
+			return $this->setLogtivityToLoadFirst();
+		}
+	}
+
 	public static function log($action = null, $meta = null, $user_id = null)
 	{
 		return Logtivity_Logger::log($action, $meta, $user_id);
+	}
+
+	public static function logError($error)
+	{
+		return new Logtivity_Error_Logger($error);
 	}
 
 	public function loadDependancies()
@@ -177,6 +208,19 @@ class Logtivity
 		}
 
 		set_transient( 'logtivity-welcome-notice', true, 5 );
+	}
+
+	public function setLogtivityToLoadFirst()
+	{
+		$path = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+
+		if ( $plugins = get_option( 'active_plugins' ) ) {
+			if ( $key = array_search( $path, $plugins ) ) {
+				array_splice( $plugins, $key, 1 );
+				array_unshift( $plugins, $path );
+				update_option( 'active_plugins', $plugins );
+			}
+		}
 	}
 
 	public function welcomeMessage() 
