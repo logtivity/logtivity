@@ -79,6 +79,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 
 	public function optionUpdated($option, $old_value, $value)
 	{
+		if ($this->getRequestMethod() == 'GET') {
+			return;
+		}
+		
 		if (!is_admin() || $old_value == $value) {
 			return;
 		}
@@ -154,6 +158,11 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			->addMeta('Old Value', $old_value)
 			->addMeta('New Value', $value)
 			->send();
+	}
+
+	private function getRequestMethod()
+	{
+		return $_SERVER['REQUEST_METHOD'] ?? null;
 	}
 
 	public function permalinksUpdated($old_permalink_structure, $permalink_structure)

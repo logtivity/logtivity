@@ -70,6 +70,7 @@ class Logtivity_Error_Logger extends Logtivity_Api
 			'url' => $this->getCurrentUrl(),
 			'method' => $this->getRequestMethod(),
 			'php_version' => phpversion(),
+			'level' => $this->error['level'] ?? null,
 		];
 	}
 

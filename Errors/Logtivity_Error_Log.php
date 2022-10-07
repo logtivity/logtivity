@@ -32,6 +32,7 @@ class Logtivity_Error_Log
 			'file' => $file,
 			'line' => $line,
 			'stack_trace' => $stack_trace,
+			'level' => 'warning',
 		];
 
 		if ($this->shouldIgnore($error, 'warnings')) {
@@ -76,6 +77,7 @@ class Logtivity_Error_Log
 			'file' => $throwable->getFile(),
 			'line' => $throwable->getLine(),
 			'stack_trace' => $stack_trace,
+			'level' => 'error',
 		];
 
 		if ($this->shouldIgnore($error, 'errors')) {
