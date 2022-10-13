@@ -6,17 +6,16 @@ class Logtivity_Wp_User
 
 	public function __construct($user = null, $field = 'ID')
 	{
-		if (is_null($user)) 
-		{
-			$this->user = wp_get_current_user();
-		}
-		elseif ($user instanceof WP_User) 
-		{
+		if (is_null($user)) {
+			if (function_exists('wp_get_current_user')) {
+				$this->user = wp_get_current_user();
+			}
+		} elseif ($user instanceof WP_User) {
 			$this->user = $user;
-		} 
-		else 
-		{
-			$this->user = get_user_by($field, $user);
+		} else {
+			if (function_exists('get_user_by')) {
+				$this->user = get_user_by($field, $user);
+			}
 		}
 	}
 
@@ -41,6 +40,10 @@ class Logtivity_Wp_User
 
 	public function id()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		if ($this->user->ID == 0) {
 			return;
 		}
@@ -50,6 +53,10 @@ class Logtivity_Wp_User
 
 	public function userLogin()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		if ($this->user->ID == 0) {
 			return;
 		}
@@ -59,36 +66,64 @@ class Logtivity_Wp_User
 
 	public function email()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->user->user_email;
 	}
 
 	public function name()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->firstName() . ' ' . $this->lastName();
 	}
 
 	public function firstName()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->meta('first_name');
 	}
 
 	public function lastName()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->meta('last_name');
 	}
 
 	public function displayName()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->user->display_name;
 	}
 
 	public function niceName()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->user->user_nicename;
 	}
 
 	public function profileLink()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return add_query_arg( 'user_id', $this->id(), self_admin_url( 'user-edit.php' ) );
 	}
 
@@ -101,6 +136,10 @@ class Logtivity_Wp_User
 	 */
 	public function meta($meta_key, $returnString = true)
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		$meta = get_user_meta($this->user->ID, $meta_key, $returnString);
 
 		if ($meta != '') {
@@ -127,6 +166,10 @@ class Logtivity_Wp_User
 	 */
 	public function isLoggedIn()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		if ($this->user->ID == 0) {
 			return false;
 		}
@@ -143,6 +186,10 @@ class Logtivity_Wp_User
 	 */
 	public function hasRole($role)
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		if ( in_array($role, $this->getRoles()) ) {
 			return true;
 		}
@@ -157,6 +204,10 @@ class Logtivity_Wp_User
 	 */
 	public function getRoles()
 	{
+		if (!$this->user) {
+			return;
+		}
+
 		return $this->user->roles;
 	}
 
@@ -167,6 +218,10 @@ class Logtivity_Wp_User
 	 */
 	public function getRole()
 	{
+		if (!$this->user) {
+			return;
+		}
+		
 		foreach ($this->getRoles() as $role) {
 			return $role;
 		}
