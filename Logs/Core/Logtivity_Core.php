@@ -159,8 +159,8 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 		Logtivity::log()
 			->setAction('Option Updated')
 			->setContext($option)
-			->addMetaIf(!is_array($old_value), 'Old Value', $old_value)
-			->addMetaIf(!is_array($value), 'New Value', $value)
+			->addMetaIf(!is_array($old_value) && !is_object($old_value), 'Old Value', $old_value)
+			->addMetaIf(!is_array($value) && !is_object($value), 'New Value', $value)
 			->send();
 	}
 
