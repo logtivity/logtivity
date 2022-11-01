@@ -130,6 +130,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'rewrite_rules',
 			'limit_login_retries',
 			'post_views_count',
+			'mepr_rules_db_cleanup_last_run',
+			'mepr_products_db_cleanup_last_run',
+			'mepr_coupons_expire_last_run',
+			'mepr_groups_db_cleanup_last_run',
 		];
 
 		if (in_array($option, $ignore)) {
@@ -155,8 +159,8 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 		Logtivity::log()
 			->setAction('Option Updated')
 			->setContext($option)
-			->addMeta('Old Value', $old_value)
-			->addMeta('New Value', $value)
+			->addMetaIf(!is_array($old_value), 'Old Value', $old_value)
+			->addMetaIf(!is_array($value), 'New Value', $value)
 			->send();
 	}
 

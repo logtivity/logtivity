@@ -35,14 +35,18 @@ class Logtivity_Error_Log
 			'level' => 'warning',
 		];
 
+		error_log($error['type'] . ' ' . $error['message'] . ' in ' . $error['file'] . ' ' . $error['line']);
+
 		if ($this->shouldIgnore($error, 'warnings')) {
 			return;
 		}
 
 		try {
 			Logtivity::logError($error)->send();
+		} catch (\Throwable $e) {
+		  
 		} catch (\Exception $e) {
-			
+		  
 		}
 
 		if ($this->errorHandler) {
@@ -80,11 +84,19 @@ class Logtivity_Error_Log
 			'level' => 'error',
 		];
 
+		error_log($error['type'] . ' ' . $error['message'] . ' in ' . $error['file'] . ' ' . $error['line']);
+
 		if ($this->shouldIgnore($error, 'errors')) {
 			return;
 		}
 
-		Logtivity::logError($error)->send();
+		try {
+			Logtivity::logError($error)->send();
+		} catch (\Throwable $e) {
+		  
+		} catch (\Exception $e) {
+		  
+		}
 
 		if ($this->exceptionHandler) {
 			call_user_func($this->exceptionHandler, $throwable);

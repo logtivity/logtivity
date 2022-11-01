@@ -22,6 +22,10 @@ class Logtivity_Log_Index_Controller
 				'action_user' => $this->getInput('action_user'),
 			])
 		);
+		
+		if (!$response) {
+			return $this->errorReponse('Please connect to Logtivity.');
+		}
 
 		if (property_exists($response, 'message') && $response->message) {
 			return $this->errorReponse($response->message);
