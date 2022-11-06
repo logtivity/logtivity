@@ -15,33 +15,31 @@ class Logtivity_Error_Log
 
 	public function errorHandler( $code, $message, $file = '', $line = 0 )
 	{
-		if (isset($_SERVER['HTTP_HOST'])) {
-	        $stack_trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS & ~DEBUG_BACKTRACE_PROVIDE_OBJECT);
-		} else {
-			$stack_trace = [
-				[
-					'line' => $file,
-					'file' => $line,
-				]
-			];
-		}
-
-		$error = [
-			'type' => $code,
-			'message' => $message,
-			'file' => $file,
-			'line' => $line,
-			'stack_trace' => $stack_trace,
-			'level' => 'warning',
-		];
-
-		error_log($error['type'] . ' ' . $error['message'] . ' in ' . $error['file'] . ' ' . $error['line']);
-
-		if ($this->shouldIgnore($error, 'warnings')) {
-			return;
-		}
-
 		try {
+			if (isset($_SERVER['HTTP_HOST'])) {
+		        $stack_trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS & ~DEBUG_BACKTRACE_PROVIDE_OBJECT);
+			} else {
+				$stack_trace = [
+					[
+						'line' => $file,
+						'file' => $line,
+					]
+				];
+			}
+
+			$error = [
+				'type' => $code,
+				'message' => $message,
+				'file' => $file,
+				'line' => $line,
+				'stack_trace' => $stack_trace,
+				'level' => 'warning',
+			];
+
+			if ($this->shouldIgnore($error, 'warnings')) {
+				return;
+			}
+
 			Logtivity::logError($error)->send();
 		} catch (\Throwable $e) {
 		  
@@ -56,41 +54,39 @@ class Logtivity_Error_Log
 
 	public function exceptionHandler(Throwable $throwable)
 	{
-		if (isset($_SERVER['HTTP_HOST'])) {
-			$stack_trace = array_merge(
-				[
+		try {
+			if (isset($_SERVER['HTTP_HOST'])) {
+				$stack_trace = array_merge(
+					[
+						[
+							'line' => $throwable->getLine(),
+							'file' => $throwable->getFile(),
+						]
+					],
+					$throwable->getTrace(),
+				);
+			} else {
+				$stack_trace = [
 					[
 						'line' => $throwable->getLine(),
 						'file' => $throwable->getFile(),
 					]
-				],
-				$throwable->getTrace(),
-			);
-		} else {
-			$stack_trace = [
-				[
-					'line' => $throwable->getLine(),
-					'file' => $throwable->getFile(),
-				]
+				];
+			}
+
+			$error = [
+				'type' => get_class($throwable),
+				'message' => $throwable->getMessage(),
+				'file' => $throwable->getFile(),
+				'line' => $throwable->getLine(),
+				'stack_trace' => $stack_trace,
+				'level' => 'error',
 			];
-		}
 
-		$error = [
-			'type' => get_class($throwable),
-			'message' => $throwable->getMessage(),
-			'file' => $throwable->getFile(),
-			'line' => $throwable->getLine(),
-			'stack_trace' => $stack_trace,
-			'level' => 'error',
-		];
-
-		error_log($error['type'] . ' ' . $error['message'] . ' in ' . $error['file'] . ' ' . $error['line']);
-
-		if ($this->shouldIgnore($error, 'errors')) {
-			return;
-		}
-
-		try {
+			if ($this->shouldIgnore($error, 'errors')) {
+				return;
+			}
+		
 			Logtivity::logError($error)->send();
 		} catch (\Throwable $e) {
 		  
