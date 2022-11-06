@@ -76,7 +76,9 @@ abstract class Logtivity_Abstract_Logger
 	{
 		try {
 			return new \DateTime( $date );
-		} catch ( \Exception $e ) {
+		} catch (\Throwable $e) {
+			return new \DateTime( '1970-01-01' );
+		} catch (\Exception $e) {
 			return new \DateTime( '1970-01-01' );
 		}
 	}
