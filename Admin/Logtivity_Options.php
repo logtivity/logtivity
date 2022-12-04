@@ -163,7 +163,7 @@ class Logtivity_Options
 		$latestReponse = $this->getOption('logtivity_latest_response');
 
 		if (is_array($latestReponse) && isset($latestReponse['date'])) {
-			return time() - strtotime($latestReponse['date']) > 3601; // 1 hour
+			return time() - strtotime($latestReponse['date']) > 10 * MINUTE_IN_SECONDS; // 10 minutes
 		}
 
 		return true;

@@ -16,7 +16,7 @@ class Logtivity_Register_Site
 		$response = json_decode(
 			(new Logtivity_Api)->setApiKey($data['team_api_key'])
 				->post('/sites', [
-					'name' => $data['name'] ?? home_url(),
+					'name' => $data['name'] ?? get_bloginfo('name'),
 					'url' => $data['url'] ?? home_url(),
 				])
 		);
