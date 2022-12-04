@@ -23,6 +23,7 @@ class Logtivity_Options
 		'logtivity_enable_white_label_mode',
 		'logtivity_disable_error_logging',
 		'logtivity_disabled_error_levels',
+		'logtivity_hide_plugin_from_ui',
 	];
 
 	/**
@@ -182,6 +183,11 @@ class Logtivity_Options
 	public function isWhiteLabelMode()
 	{
 		return $this->getOption('logtivity_enable_white_label_mode');
+	}
+
+	public function isPluginHiddenFromUI()
+	{
+		return $this->getOption('logtivity_hide_plugin_from_ui');
 	}
 
 	/**

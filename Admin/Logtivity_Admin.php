@@ -3,6 +3,8 @@
 class Logtivity_Admin
 {
 	protected $options;
+
+	protected static $shouldHidePluginFromUI = false;
 	
 	public function __construct()
 	{
@@ -11,7 +13,38 @@ class Logtivity_Admin
 		add_action( 'wp_ajax_logtivity_update_settings', [$this, 'update']);
 		add_action( 'wp_ajax_nopriv_logtivity_update_settings', [$this, 'update']);
 
+		add_filter('logtivity_hide_from_menu', [$this, 'shouldHidePluginFromUI']);
+		add_filter('all_plugins', [$this, 'maybeHideFromMenu']);
+
 		$this->options = new Logtivity_Options;
+	}
+
+	public function maybeHideFromMenu($plugins)
+	{
+		if (!$this->shouldHidePluginFromUI(false)) {
+			return $plugins;
+		}
+
+		$shouldHide = ! array_key_exists( 'show_all', $_GET );
+
+		if ( $shouldHide ) {
+			$hiddenPlugins = [
+				'logtivity/logtivity.php',
+			];
+
+			foreach ( $hiddenPlugins as $hiddenPlugin ) {
+				unset( $plugins[ $hiddenPlugin ] );
+			}
+		}
+		return $plugins;
+	}
+
+	public function shouldHidePluginFromUI($value)
+	{
+		if (self::$shouldHidePluginFromUI = (new Logtivity_Options)->isPluginHiddenFromUI()) {
+			return self::$shouldHidePluginFromUI;
+		}
+		return $value;
 	}
 
 	/**

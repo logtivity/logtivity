@@ -131,6 +131,7 @@ class Logtivity_Api
 						'logtivity_enable_white_label_mode' => $body['settings']['enable_white_label_mode'],
 						'logtivity_disabled_error_levels' => $body['settings']['disabled_error_levels'],
 						'logtivity_disable_error_logging' => $body['settings']['disable_error_logging'],
+						'logtivity_hide_plugin_from_ui' => $body['settings']['hide_plugin_from_ui'],
 					],
 					false
 				);

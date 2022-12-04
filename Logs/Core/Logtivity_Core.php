@@ -98,6 +98,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'logtivity_enable_white_label_mode',
 			'logtivity_disabled_error_levels',
 			'logtivity_disable_error_logging',
+			'logtivity_hide_plugin_from_ui',
 			'recently_activated',
 			'active_plugins',
 			'jp_sync_last_success_sync',
