@@ -48,14 +48,11 @@
 	</tbody>
 </table>
 
-<?php if ($meta->current_page): ?>
-
+<?php if (isset($meta) && $meta->current_page): ?>
 	<div data-current-page="<?php echo $meta->current_page ?>" style="text-align: center; padding: 20px">
-	
 		<button <?php echo ( $meta->current_page == 1 ? 'disabled' : ''); ?> class="js-logtivity-pagination button-primary" data-page="<?php echo sanitize_text_field($meta->current_page - 1) ?>">Previous</button>
 		
 		<button <?php echo ( ! $hasNextPage ? 'disabled' : ''); ?> class="js-logtivity-pagination button-primary" data-page="<?php echo sanitize_text_field($meta->current_page + 1) ?>">Next</button>
-
 	</div>
 <?php endif ?>
 
