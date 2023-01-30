@@ -101,6 +101,9 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'logtivity_hide_plugin_from_ui',
 			'logtivity_disable_default_logging',
 			'logtivity_site_api_key',
+			'logtivity_last_settings_check_in_at',
+			'logtivity_enable_options_table_logging',
+			'logtivity_enable_post_meta_logging',
 			'recently_activated',
 			'active_plugins',
 			'jp_sync_last_success_sync',
@@ -157,6 +160,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			if (strpos($option, $wildcard) !== false) {
 				return;
 			}
+		}
+
+		if (get_option('logtivity_enable_options_table_logging') === "0") {
+			return;
 		}
 
 		Logtivity::log()

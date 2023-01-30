@@ -32,6 +32,7 @@ class Logtivity
 		'Helpers/Logtivity_Log_Global_Function',
 		'Logs/Logtivity_Abstract_Logger',
 		'Services/Logtivity_Check_For_Disabled_Individual_Logs',
+		'Services/Logtivity_Check_For_New_Settings',
 		/**
 		 * Error logging
 		 */

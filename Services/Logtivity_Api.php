@@ -112,7 +112,7 @@ class Logtivity_Api
 
 		$response = wp_remote_retrieve_body($response);
 
-		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST') {
+		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST' && $url != '/settings-check') {
 
 			$this->options->update([
 					'logtivity_latest_response' => [
@@ -123,20 +123,6 @@ class Logtivity_Api
 				false
 			);
 
-			$body = json_decode($response, true);
-
-			if (isset($body['settings'])) {
-				$this->options->update([
-						'logtivity_global_disabled_logs' => $body['settings']['disabled_logs'],
-						'logtivity_enable_white_label_mode' => $body['settings']['enable_white_label_mode'],
-						'logtivity_disabled_error_levels' => $body['settings']['disabled_error_levels'],
-						'logtivity_disable_error_logging' => $body['settings']['disable_error_logging'],
-						'logtivity_hide_plugin_from_ui' => $body['settings']['hide_plugin_from_ui'] ?? null,
-						// 'logtivity_disable_default_logging' => $body['settings']['disable_default_logging'],
-					],
-					false
-				);
-			}
 		}
 
 		return $response;

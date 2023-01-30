@@ -78,6 +78,10 @@ class Logtivity_Meta extends Logtivity_Abstract_Logger
 			return;
 		}
 
+		if (get_option('logtivity_enable_post_meta_logging') === "0") {
+			return;
+		}
+
 		return Logtivity_Logger::log()
 			->setAction($this->getPostTypeLabel($object_id) . ' Meta '. $keyword)
 			->setContext($meta_key)

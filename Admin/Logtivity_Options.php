@@ -10,6 +10,8 @@ class Logtivity_Options
 	protected $settings = [
 		'logtivity_site_api_key',
 		'logtivity_disable_default_logging',
+		'logtivity_enable_options_table_logging',
+		'logtivity_enable_post_meta_logging',
 		'logtivity_should_store_user_id',
 		'logtivity_should_store_ip',
 		'logtivity_should_log_profile_link',
@@ -151,23 +153,7 @@ class Logtivity_Options
 	 */
 	public function shouldLogLatestResponse()
 	{
-		return $this->getOption('logtivity_enable_debug_mode') || $this->shouldCheckInWithApi();
-	}
-
-	/**
-	 * Is it time to check in with the latest API response incase of any new global settings?
-	 * 
-	 * @return bool
-	 */
-	public function shouldCheckInWithApi()
-	{
-		$latestReponse = $this->getOption('logtivity_latest_response');
-
-		if (is_array($latestReponse) && isset($latestReponse['date'])) {
-			return time() - strtotime($latestReponse['date']) > 10 * MINUTE_IN_SECONDS; // 10 minutes
-		}
-
-		return true;
+		return $this->getOption('logtivity_enable_debug_mode');
 	}
 
 	public function urlHash()
