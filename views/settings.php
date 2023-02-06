@@ -36,22 +36,6 @@
 					</tr>			
 					<tr class="user-user-login-wrap">
 						<th>
-							<label for="logtivity_disable_default_logging">Disable built in Event Logging.</label>
-							<?php if (has_filter('logtivity_disable_default_logging')): ?>
-								<div class="logtivity-constant">This option has been set in code.</div>
-							<?php endif ?>
-						</th>
-						<td>
-							<input type="hidden" name="logtivity_disable_default_logging" id="logtivity_disable_default_logging" value="0">
-
-							<input <?php echo ( has_filter('logtivity_disable_default_logging') ? 'readonly' : ''); ?> type="checkbox" name="logtivity_disable_default_logging" id="logtivity_disable_default_logging" value="1" class="regular-checkbox" <?php echo ( absint($options['logtivity_disable_default_logging']) ? 'checked' : ''); ?>>
-						</td>
-						<td>
-							<span class="description">Check this box if you do not want the plugin to log actions automatically and you would prefer to manually log specific actions with code.</span>
-						</td>
-					</tr>
-					<tr class="user-user-login-wrap">
-						<th>
 							<label for="logtivity_should_store_user_id">Store User ID</label>
 							<?php if (has_filter('logtivity_should_store_user_id')): ?>
 								<div class="logtivity-constant">This option has been set in code.</div>

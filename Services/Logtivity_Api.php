@@ -112,7 +112,7 @@ class Logtivity_Api
 
 		$response = wp_remote_retrieve_body($response);
 
-		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST' && $url != '/settings-check') {
+		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST') {
 
 			$this->options->update([
 					'logtivity_latest_response' => [
@@ -123,9 +123,32 @@ class Logtivity_Api
 				false
 			);
 
+			update_option('logtivity_last_settings_check_in_at', ['date' => date("Y-m-d H:i:s")]);
+
+			$body = json_decode($response, true);
+
+			$this->updateSettings($body);
 		}
 
 		return $response;
+	}
+
+	public function updateSettings($body)
+	{
+		if (isset($body['settings'])) {
+			$this->options->update([
+					'logtivity_global_disabled_logs' => $body['settings']['disabled_logs'] ?? null,
+					'logtivity_enable_white_label_mode' => $body['settings']['enable_white_label_mode'] ?? null,
+					'logtivity_disabled_error_levels' => $body['settings']['disabled_error_levels'] ?? null,
+					'logtivity_disable_error_logging' => $body['settings']['disable_error_logging'] ?? null,
+					'logtivity_hide_plugin_from_ui' => $body['settings']['hide_plugin_from_ui'] ?? null,
+					'logtivity_disable_default_logging' => $body['settings']['disable_default_logging'] ?? null,
+					'logtivity_enable_options_table_logging' => $body['settings']['enable_options_table_logging'] ?? null,
+					'logtivity_enable_post_meta_logging' => $body['settings']['enable_post_meta_logging'] ?? null,
+				],
+				false
+			);
+		}
 	}
 
 	/**	

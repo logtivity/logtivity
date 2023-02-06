@@ -154,6 +154,10 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'edd_api',
 			'edd_sl',
 			'frm_',
+			'queue',
+			'cron',
+			'sync',
+			'last_run',
 		];
 
 		foreach ($wildcardIgnores as $wildcard) {

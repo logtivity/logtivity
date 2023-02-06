@@ -153,7 +153,18 @@ class Logtivity_Options
 	 */
 	public function shouldLogLatestResponse()
 	{
-		return $this->getOption('logtivity_enable_debug_mode');
+		return $this->getOption('logtivity_enable_debug_mode') || $this->shouldCheckInWithApi();
+	}
+
+	public function shouldCheckInWithApi()
+	{
+		$latestReponse = get_option('logtivity_last_settings_check_in_at');
+
+		if (is_array($latestReponse) && isset($latestReponse['date'])) {
+			return time() - strtotime($latestReponse['date']) > 10 * MINUTE_IN_SECONDS; // 10 minutes
+		}
+
+		return true;
 	}
 
 	public function urlHash()

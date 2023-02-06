@@ -143,6 +143,10 @@ class Logtivity
 		}
 
 		add_action('plugins_loaded', function() {
+			if ($this->defaultLoggingDisabled()) {
+				return;
+			}
+			
 			$this->maybeLoadLogClasses();
 
 			$this->loadIntegrationDependancies();
@@ -151,10 +155,6 @@ class Logtivity
 
 	public function maybeLoadLogClasses()
 	{
-		if ($this->defaultLoggingDisabled()) {
-			return;
-		}
-
 		foreach ($this->logClasses as $filePath) 
 		{
 			$this->loadFile($filePath);
