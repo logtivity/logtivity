@@ -78,7 +78,9 @@ class Logtivity_Meta extends Logtivity_Abstract_Logger
 			return;
 		}
 
-		if (get_option('logtivity_enable_post_meta_logging') === 0) {
+		$logtivity_enable_post_meta_logging = get_option('logtivity_enable_post_meta_logging');
+
+		if ($logtivity_enable_post_meta_logging === 0 || $logtivity_enable_post_meta_logging === '0') {
 			return;
 		}
 

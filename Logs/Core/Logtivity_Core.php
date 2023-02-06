@@ -166,7 +166,9 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			}
 		}
 
-		if (get_option('logtivity_enable_options_table_logging') === 0) {
+		$logtivity_enable_options_table_logging = get_option('logtivity_enable_options_table_logging');
+
+		if ($logtivity_enable_options_table_logging === 0 || $logtivity_enable_options_table_logging === '0') {
 			return;
 		}
 
