@@ -67,7 +67,7 @@ class Logtivity_User extends Logtivity_Abstract_Logger
 		$user = new Logtivity_WP_User($user_id);
 
 		return Logtivity_Logger::log()
-			->setAction('Profile Updated')
+			->setAction('User Updated')
 			->setContext($user->getRole())
 			->addMeta('Username', $user->userLogin())
 			->send();
