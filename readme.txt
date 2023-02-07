@@ -264,7 +264,7 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 
 = 2.2.0 =
 
-_Release Date – Wednesday 6th February 2023_
+_Release Date – Tuesday 7th February 2023_
 
 * Add support for globally disabling default logs and enabling/disabling Options table and Post Meta changes.
 
