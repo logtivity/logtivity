@@ -63,7 +63,7 @@ class Logtivity_Error_Log
 							'file' => $throwable->getFile(),
 						]
 					],
-					$throwable->getTrace(),
+					$throwable->getTrace()
 				);
 			} else {
 				$stack_trace = [
