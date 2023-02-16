@@ -4,7 +4,7 @@ Contributors: logtivity, stevejburge
 Tags: activity log, error logs, event monitoring, user activity, 
 Requires at least: 4.7
 Tested up to: 6.0
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -261,6 +261,13 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 * Log tivity, loggtivity, logg tivity (all incorrect)
 
 == Changelog ==
+
+= 2.2.1 =
+
+_Release Date – Thursday 16th February 2023_
+
+* Fix error on PHP7.0 on activation.
+* Rename 'Profile Updated' log to User Updated.
 
 = 2.2.0 =
 
