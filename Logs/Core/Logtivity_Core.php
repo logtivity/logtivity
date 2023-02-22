@@ -99,6 +99,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'logtivity_disabled_error_levels',
 			'logtivity_disable_error_logging',
 			'logtivity_hide_plugin_from_ui',
+			'logtivity_custom_plugin_name',
 			'logtivity_disable_default_logging',
 			'logtivity_site_api_key',
 			'logtivity_last_settings_check_in_at',

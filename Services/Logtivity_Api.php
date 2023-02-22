@@ -145,6 +145,7 @@ class Logtivity_Api
 					'logtivity_disable_default_logging' => $body['settings']['disable_default_logging'] ?? null,
 					'logtivity_enable_options_table_logging' => $body['settings']['enable_options_table_logging'] ?? null,
 					'logtivity_enable_post_meta_logging' => $body['settings']['enable_post_meta_logging'] ?? null,
+					'logtivity_custom_plugin_name' => $body['settings']['custom_plugin_name'] ?? null,
 				],
 				false
 			);

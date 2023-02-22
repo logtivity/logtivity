@@ -26,6 +26,7 @@ class Logtivity_Options
 		'logtivity_disable_error_logging',
 		'logtivity_disabled_error_levels',
 		'logtivity_hide_plugin_from_ui',
+		'logtivity_custom_plugin_name',
 	];
 
 	/**
@@ -185,6 +186,11 @@ class Logtivity_Options
 	public function isPluginHiddenFromUI()
 	{
 		return $this->getOption('logtivity_hide_plugin_from_ui');
+	}
+
+	public function customPluginName()
+	{
+		return $this->getOption('logtivity_custom_plugin_name');
 	}
 
 	/**

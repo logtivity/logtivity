@@ -21,6 +21,12 @@ class Logtivity_Admin
 
 	public function maybeHideFromMenu($plugins)
 	{
+		if ($name = (new Logtivity_Options)->customPluginName()) {
+			if (isset($plugins['logtivity/logtivity.php'])) {
+				$plugins['logtivity/logtivity.php']['Name'] = $name;
+			}
+		}
+
 		if (!$this->shouldHidePluginFromUI(false)) {
 			return $plugins;
 		}
