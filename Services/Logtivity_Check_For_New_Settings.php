@@ -15,15 +15,21 @@ class Logtivity_Check_For_New_Settings
 
 		update_option('logtivity_last_settings_check_in_at', ['date' => date("Y-m-d H:i:s")]);
 
-		$api = new Logtivity_Api;
+		try {
+			$api = new Logtivity_Api;
 
-		$response = $api->post('/settings-check', []);
+			$response = $api->post('/settings-check', []);
 
-		$response = wp_remote_retrieve_body($response);
+			if (empty($response)) {
+				return;
+			}
+			
+			$body = json_decode($response, true);
 
-		$body = json_decode($response, true);
-
-		$api->updateSettings($body);
+			$api->updateSettings($body);
+		} catch (\Exception $e) {
+			
+		}
 	}
 
 	public function shouldCheckInWithApi()

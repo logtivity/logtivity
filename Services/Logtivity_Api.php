@@ -99,7 +99,7 @@ class Logtivity_Api
 
 		$response = wp_remote_post($this->getEndpoint($url), [
 			'method' => $method,
-			'timeout'   => ( $shouldLogLatestResponse ? 45 : 0.01),
+			'timeout'   => ( $shouldLogLatestResponse ? 6 : 0.01),
 			'blocking'  => ( $shouldLogLatestResponse ? true : false),
 			'redirection' => 5,
 			'httpversion' => '1.0',
@@ -112,8 +112,11 @@ class Logtivity_Api
 
 		$response = wp_remote_retrieve_body($response);
 
-		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST') {
+		if (empty($response)) {
+			return $response;
+		}
 
+		if ($shouldLogLatestResponse && $this->notUpdatingWidgetInCustomizer() && $method === 'POST') {
 			$this->options->update([
 					'logtivity_latest_response' => [
 						'date' => date("Y-m-d H:i:s"),
