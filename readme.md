@@ -4,7 +4,7 @@ Contributors: logtivity, stevejburge
 Tags: activity log, error logs, event monitoring, user activity, 
 Requires at least: 4.7
 Tested up to: 6.0
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -261,6 +261,12 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 * Log tivity, loggtivity, logg tivity (all incorrect)
 
 == Changelog ==
+
+= 2.3.0 =
+
+_Release Date – Thursday 2nd March 2023_
+
+* Add ability to set a custom name for the plugin when listed in /wp-admin/plugins.php
 
 = 2.2.1 =
 
