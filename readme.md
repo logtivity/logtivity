@@ -267,6 +267,7 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 _Release Date – Thursday 2nd March 2023_
 
 * Add ability to set a custom name for the plugin when listed in /wp-admin/plugins.php
+* Reduce timeout when checking in the with API for settings updates to ensure to not affect performance.
 
 = 2.2.1 =
 
