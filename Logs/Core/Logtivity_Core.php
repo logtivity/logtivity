@@ -112,6 +112,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'postman_state',
 			'jetpack_sync_settings_dedicated_sync_enabled',
 			'jetpack_plugin_api_action_links',
+			'jetpack_protect_blocked_attempts',
 			'stats_cache',
 			'admin_email_lifespan',
 			'db_upgraded',
@@ -141,6 +142,7 @@ class Logtivity_Core extends Logtivity_Abstract_Logger
 			'mepr_products_db_cleanup_last_run',
 			'mepr_coupons_expire_last_run',
 			'mepr_groups_db_cleanup_last_run',
+			'ws_form_css',
 		];
 
 		if (in_array($option, $ignore)) {

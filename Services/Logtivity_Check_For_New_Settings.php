@@ -37,7 +37,7 @@ class Logtivity_Check_For_New_Settings
 		$latestReponse = get_option('logtivity_last_settings_check_in_at');
 
 		if (is_array($latestReponse) && isset($latestReponse['date'])) {
-			return time() - strtotime($latestReponse['date']) > 10 * MINUTE_IN_SECONDS; // 10 minutes
+			return time() - strtotime($latestReponse['date']) > 60 * MINUTE_IN_SECONDS; // 60 minutes
 		}
 
 		return true;
