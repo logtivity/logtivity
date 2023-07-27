@@ -2,23 +2,46 @@
 
 class Logtivity_User extends Logtivity_Abstract_Logger
 {
+	protected static $loggedUserlogin = false;
+
 	public function registerHooks()
 	{
-		add_action('wp_login', [$this, 'userLoggedIn'], 10, 2);
+		add_action('wp_login', [$this, 'wpLogin'], 10, 2);
+		add_action('set_logged_in_cookie', [$this, 'preSetLoggedInCookie'], 10, 6);
 		add_action('wp_logout', [$this, 'userLoggedOut'], 10, 1);
 		add_action( 'user_register', [$this, 'userCreated'], 10, 1 );
 		add_action( 'delete_user', [$this, 'userDeleted'] );
 		add_action( 'profile_update', [$this, 'profileUpdated'], 10, 2 );
 	}
 
-	public function userLoggedIn( $user_login, $user ) 
+	public function preSetLoggedInCookie($logged_in_cookie, $expire, $expiration, $user_id, $scheme, $token)
 	{
-		$logtivityUser = new Logtivity_WP_User($user->ID);
+		if (self::$loggedUserlogin) {
+			return;
+		}
+		
+		return $this->userLoggedIn($user_id);
+	}
 
-		return (new Logtivity_Logger($user))
-	    	->setAction('User Logged In')
-	    	->setContext($logtivityUser->getRole())
-	    	->send();
+	public function wpLogin($user_login, $user)
+	{
+		if (self::$loggedUserlogin) {
+			return;
+		}
+
+		return $this->userLoggedIn($user->ID);
+	}
+
+	public function userLoggedIn( $user_id ) 
+	{
+		self::$loggedUserlogin = true;
+
+		$logtivityUser = new Logtivity_WP_User($user_id);
+
+		return (new Logtivity_Logger($user_id))
+			->setAction('User Logged In')
+			->setContext($logtivityUser->getRole())
+			->send();
 	}
 
 	public function userLoggedOut($user_id)
