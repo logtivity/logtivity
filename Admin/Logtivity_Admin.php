@@ -145,6 +145,8 @@ class Logtivity_Admin
 		delete_transient( 'dismissed-logtivity-site-url-has-changed-notice' );
 
 		$this->options->update();
+
+		(new Logtivity_Check_For_New_Settings)->checkForNewSettings();
 		
 	    wp_safe_redirect( $this->settingsPageUrl() );
 	    exit;

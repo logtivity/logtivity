@@ -16,6 +16,7 @@ class Logtivity_Theme extends Logtivity_Abstract_Logger
 		return Logtivity_Logger::log()
 			->setAction("Theme Activated")
 			->setContext((is_object($new_theme) ? $new_theme->name : $new_theme))
+			->addMeta('Version', ( is_object($new_theme) ? $new_theme->version : $new_theme))
 			->addMeta('Old Theme', ( is_object($old_theme) ? $old_theme->name : $old_theme))
 			->send();
 	}
