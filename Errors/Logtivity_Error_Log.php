@@ -122,7 +122,6 @@ class Logtivity_Error_Log
 
 	public function maybeRateLimit($error)
 	{
-		return false;
 		if (!is_int($error['type'])) {
 			return false;
 		}
