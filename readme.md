@@ -1,23 +1,23 @@
 === Error Log Monitor, Activity Logs, User Activity Tracking from Logtivity ===
 
 Contributors: logtivity, stevejburge
-Tags: activity log, error logs, event monitoring, user activity, 
+Tags: activity log, error logs, event monitoring, user activity, error log, activity logs, logs, log data, site activities, site events
 Requires at least: 4.7
-Tested up to: 6.0
-Stable tag: 2.3.0
+Tested up to: 6.3
+Stable tag: 3.0.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Logtivity is the error log and activity log service for WordPress agencies. Logtivity is a unified platform that tracks activity and errors across all your WordPress sites.
+Logtivity is the error log and activity log service for WordPress admins. Logtivity is a unified platform that tracks activity and errors across all your WordPress sites.
 
 == Description ==
 
-<strong>When you set up Logtivity to monitor your clients' sites, you can relax. We track everything that happens on the sites you maintain, and Logtivity also sends you alerts for important events!</strong>
+<strong>When you set up Logtivity to monitor your WordPress sites, you can relax. We track everything that happens on the sites you maintain, and Logtivity also sends you alerts for important events!</strong>
 
-Logtivity is a unified platform that tracks activity and errors across all your WordPress sites. We record everything that happens, and then send you alerts for important events! You can install Logtivity’s plugin and then use our service to keep a close eye on everything that happens on your clients’ sites.
+Logtivity is a unified platform that tracks activity and errors across all your WordPress sites. We record everything that happens, and then send you alerts for important events! You can install Logtivity’s plugin and then use our service to keep a close eye on everything that happens on your sites.
 
-Your clients never have to know that you’re using Logtivity. You can either show a white label version of the activity logs, or you can hide Logtivity entirely.
+If you work with clients, they never have to know that you’re using Logtivity. You can either show a white label version of the activity logs, or you can hide Logtivity entirely.
 
 ### WordPress Error Logs ###
 
@@ -261,6 +261,12 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 * Log tivity, loggtivity, logg tivity (all incorrect)
 
 == Changelog ==
+
+= 3.0.0 =
+
+_Release Date – Tuesday 26th September 2023_
+
+* Add site health features.
 
 = 2.3.0 =
 

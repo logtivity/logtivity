@@ -93,58 +93,66 @@ class Logtivity_Check_For_New_Settings
 		$activePlugins = get_option('active_plugins');
 		$pluginsWithUpdateAvailable = get_site_transient('update_plugins');
 
-		foreach ($allPlugins as $filePath => $data) {
-			if (in_array($filePath, $activePlugins)) {
-				$allPlugins[$filePath]['is_active'] = true;
-			} else {
-				$allPlugins[$filePath]['is_active'] = false;
-			}
+		$pluginData = [];
 
-			$allPlugins[$filePath]['slug'] = $filePath;
+		foreach ($allPlugins as $filePath => $data) {
+
+			$pluginData[$filePath]['Name'] = $data['Name'];
+			$pluginData[$filePath]['Version'] = $data['Version'];
+			$pluginData[$filePath]['Author'] = $data['Author'];
+			$pluginData[$filePath]['AuthorURI'] = $data['AuthorURI'];
+			$pluginData[$filePath]['slug'] = $filePath;
+
+			if (in_array($filePath, $activePlugins)) {
+				$pluginData[$filePath]['is_active'] = true;
+			} else {
+				$pluginData[$filePath]['is_active'] = false;
+			}
 			
 			if (!empty($pluginsWithUpdateAvailable->response)) {
 				if (array_key_exists($filePath, $pluginsWithUpdateAvailable->response)) {
-					$allPlugins[$filePath]['update_available'] = true;
-					$allPlugins[$filePath]['new_version'] = $this->getPropertyIfExists(
+					$pluginData[$filePath]['update_available'] = true;
+					$pluginData[$filePath]['new_version'] = $this->getPropertyIfExists(
 						$pluginsWithUpdateAvailable->response[$filePath],
 						'new_version'
 					);
 
-					if (
-						property_exists($pluginsWithUpdateAvailable->response[$filePath], 'icons')
-						&& is_array($pluginsWithUpdateAvailable->response[$filePath]->icons)
-					) {
-						$allPlugins[$filePath]['icon'] = $this->getIcon($pluginsWithUpdateAvailable->response[$filePath]->icons);
-					}
+					// if (
+					// 	property_exists($pluginsWithUpdateAvailable->response[$filePath], 'icons')
+					// 	&& is_array($pluginsWithUpdateAvailable->response[$filePath]->icons)
+					// ) {
+					// 	$allPlugins[$filePath]['icon'] = $this->getIcon($pluginsWithUpdateAvailable->response[$filePath]->icons);
+					// }
 
-					$allPlugins[$filePath]['new_version_requires_wp'] = $this->getPropertyIfExists(
+					$pluginData[$filePath]['new_version_requires_wp'] = $this->getPropertyIfExists(
 						$pluginsWithUpdateAvailable->response[$filePath],
 						'requires'
 					);
-					$allPlugins[$filePath]['tested'] = $this->getPropertyIfExists(
+					$pluginData[$filePath]['tested'] = $this->getPropertyIfExists(
 						$pluginsWithUpdateAvailable->response[$filePath],
 						'tested'
 					);
-					$allPlugins[$filePath]['new_version_requires_php'] = $this->getPropertyIfExists(
+					$pluginData[$filePath]['new_version_requires_php'] = $this->getPropertyIfExists(
 						$pluginsWithUpdateAvailable->response[$filePath],
 						'requires_php'
 					);
-					$allPlugins[$filePath]['upgrade_notice'] = $this->getPropertyIfExists(
-						$pluginsWithUpdateAvailable->response[$filePath],
-						'upgrade_notice'
-					);
+					// $pluginData[$filePath]['upgrade_notice'] = $this->getPropertyIfExists(
+					// 	$pluginsWithUpdateAvailable->response[$filePath],
+					// 	'upgrade_notice'
+					// );
 				} else {
-					$allPlugins[$filePath]['update_available'] = false;
-					$allPlugins[$filePath]['new_version'] = null;
-					$allPlugins[$filePath]['icon'] = null;
-					$allPlugins[$filePath]['new_version_requires_wp'] = null;
-					$allPlugins[$filePath]['tested'] = null;
-					$allPlugins[$filePath]['new_version_requires_php'] = null;
-					$allPlugins[$filePath]['upgrade_notice'] = null;
+					$pluginData[$filePath]['update_available'] = false;
+					$pluginData[$filePath]['new_version'] = null;
+					// $pluginData[$filePath]['icon'] = null;
+					$pluginData[$filePath]['new_version_requires_wp'] = null;
+					$pluginData[$filePath]['tested'] = null;
+					$pluginData[$filePath]['new_version_requires_php'] = null;
+					// $pluginData[$filePath]['upgrade_notice'] = null;
 				}
 			}
 		}
-		return $allPlugins;
+
+		return $pluginData;
 	}
 
 	private function getPropertyIfExists($object, $property)
