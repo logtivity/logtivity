@@ -3,7 +3,7 @@
 Contributors: logtivity, stevejburge
 Tags: activity log, error logs, event monitoring, user activity, error log, activity logs, logs, log data, site activities, site events
 Requires at least: 4.7
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 3.0.0
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -264,7 +264,7 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 
 = 3.0.0 =
 
-_Release Date – Tuesday 26th September 2023_
+_Release Date – Saturday 11th November 2023_
 
 * Add site health features.
 
