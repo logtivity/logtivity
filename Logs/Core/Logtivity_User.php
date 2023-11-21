@@ -7,20 +7,10 @@ class Logtivity_User extends Logtivity_Abstract_Logger
 	public function registerHooks()
 	{
 		add_action('wp_login', [$this, 'wpLogin'], 10, 2);
-		add_action('set_logged_in_cookie', [$this, 'preSetLoggedInCookie'], 10, 6);
 		add_action('wp_logout', [$this, 'userLoggedOut'], 10, 1);
 		add_action( 'user_register', [$this, 'userCreated'], 10, 1 );
 		add_action( 'delete_user', [$this, 'userDeleted'] );
 		add_action( 'profile_update', [$this, 'profileUpdated'], 10, 2 );
-	}
-
-	public function preSetLoggedInCookie($logged_in_cookie, $expire, $expiration, $user_id, $scheme, $token)
-	{
-		if (self::$loggedUserlogin) {
-			return;
-		}
-		
-		return $this->userLoggedIn($user_id);
 	}
 
 	public function wpLogin($user_login, $user)
