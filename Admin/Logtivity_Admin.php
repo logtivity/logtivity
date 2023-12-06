@@ -63,7 +63,7 @@ class Logtivity_Admin
 				($this->options->isWhiteLabelMode() ? 'Logs' : 'Logtivity'), 
 				($this->options->isWhiteLabelMode() ? 'Logs' : 'Logtivity'), 
 				'manage_options', 
-				($this->options->isWhiteLabelMode() ? 'logs' : 'logtivity'), 
+				($this->options->isWhiteLabelMode() ? 'lgtvy-logs' : 'logtivity'), 
 				[$this, 'showLogIndexPage'], 
 				'dashicons-chart-area', 
 				26 
