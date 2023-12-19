@@ -72,7 +72,7 @@ class Logtivity_Admin
 		
 		if (!apply_filters('logtivity_hide_settings_page', false)) {
 			add_submenu_page(
-				($this->options->isWhiteLabelMode() ? 'logs' : 'logtivity'),
+				($this->options->isWhiteLabelMode() ? 'lgtvy-logs' : 'logtivity'),
 				'Logtivity Settings', 
 				'Settings', 
 				'manage_options', 
