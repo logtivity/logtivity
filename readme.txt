@@ -4,7 +4,7 @@ Contributors: logtivity, stevejburge
 Tags: activity log, error logs, event monitoring, user activity, error log, activity logs, logs, log data, site activities, site events
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -261,6 +261,13 @@ Logtivity is the official brandname. When writing about this activity plugin, pl
 * Log tivity, loggtivity, logg tivity (all incorrect)
 
 == Changelog ==
+
+= 3.0.1 =
+
+_Release Date – Saturday 6th January 2024_
+
+* Change Logtivity settings URL in white label mode.
+* Fix User Logged In event firing when external system logs in for backups etc.
 
 = 3.0.0 =
 
